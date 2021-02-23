@@ -1,0 +1,77 @@
+# -------------------------------------------------
+# This workflow runs Parasoft Jtest analysis with selected build tool (maven, gradle, etc)
+# For details on how to configure your project with Jtest please refer to the Jtest examples README file
+# -------------------------------------------------
+# Prerequisites:
+# 1. Set up the Jtest license and other settings in jtestcli.properties in the Jtest installation directory
+# 2. Include 'sarif' value for report.format key in the settings (e.g. report.format=html,pdf,sarif)
+name: Parasoft Jtest - locally configured
+
+# Define when the action will run. 
+on:
+  
+  # Triggers the workflow on push, pull request, or other events
+  # push:
+  #   branches: [ main ]
+  # pull_request:
+  #   branches: [ main ]
+
+  # Allows to run workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  jtest:
+    name: Jtest job execution
+    # The type of runner that the job will run on
+    runs-on: self-hosted
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run static analysis
+        # -------------------------------------------------
+        # Prerequisites:
+        # 1. Configure working directory if it is different than repository root
+        working-directory: jtest-demo
+        # 2. Enable one of the "Running" steps below.
+        # If you want to fail the step when any Jtest violation is reported, add "-Djtest.fail=true" to Jtest parameters run options.
+          
+        # -------------------------------------------------
+        # Running with Maven
+        # Prerequisites:
+        # 1. Configure your Maven setup by following the Jtest User Guide:
+        # https://docs.parasoft.com/display/JTEST20202/Configuring+the+Jtest+Plugin+for+Maven
+        # 2. Uncomment the following to run the "Recommended Rules" test configuration:
+        # run: ./mvnw jtest:jtest
+        # or uncomment the following to run the specified test configuration:
+        # run: ./mvnw clean jtest:jtest "-Djtest.config=builtin://Recommended Rules"
+        
+        # -------------------------------------------------
+        # Running with Gradle
+        # Prerequisites:
+        # 1. Configure the installed Jtest package or add the desired settings to the "jtest" block of your buildscript.
+        # 2. Uncomment the following to run the "Recommended Rules" test configuration:
+        run: ./gradlew clean assemble jtest
+        # or uncomment the following to run the specified test configuration:
+        # run: ./gradlew clean assemble jtest "-Djtest.config=builtin://Recommended Rules"
+
+        # -------------------------------------------------
+        # Running with Ant, running with Jtest data file - follow jtest examples README files and run a command
+        # run: 
+          
+      # -------------------------------------------------
+      # Archive the findings reports as job artifact
+      - name: Upload report artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Report files
+          # path: jtest-demo/target/jtest/report.*
+          path: jtest-demo/build/reports/jtest/report.*
+      
+      # -------------------------------------------------
+      # Upload the findings into the GitHub code scanning alert section
+      - uses: github/codeql-action/upload-sarif@v1
+        with:
+      #    sarif_file: jtest-demo/target/jtest/report.sarif
+          sarif_file: jtest-demo/build/reports/jtest/report.sarif
