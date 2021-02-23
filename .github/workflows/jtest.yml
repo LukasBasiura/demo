@@ -33,7 +33,7 @@ jobs:
         # -------------------------------------------------
         # Prerequisites:
         # 1. Configure working directory if it is different than repository root
-        working-directory: jtest-demo
+        working-directory: demo
         # 2. Enable one of the "Running" steps below.
         # If you want to fail the step when any Jtest violation is reported, add "-Djtest.fail=true" to Jtest parameters run options.
           
