@@ -67,11 +67,11 @@ jobs:
         with:
           name: Report files
           # path: jtest-demo/target/jtest/report.*
-          path: jtest-demo/build/reports/jtest/report.*
+          path: build/reports/jtest/report.*
       
       # -------------------------------------------------
       # Upload the findings into the GitHub code scanning alert section
       - uses: github/codeql-action/upload-sarif@v1
         with:
       #    sarif_file: jtest-demo/target/jtest/report.sarif
-          sarif_file: jtest-demo/build/reports/jtest/report.sarif
+          sarif_file: build/reports/jtest/report.sarif
