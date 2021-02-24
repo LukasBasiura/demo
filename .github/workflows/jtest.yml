@@ -22,9 +22,10 @@ on:
 jobs:
   jtest:
     name: Jtest job execution
+    
     # The type of runner that the job will run on
     runs-on: self-hosted
-    
+  
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -33,7 +34,7 @@ jobs:
         # -------------------------------------------------
         # Prerequisites:
         # 1. Configure working directory if it is different than repository root
-
+        working-directory: demo/demo
         # 2. Enable one of the "Running" steps below.
         # If you want to fail the step when any Jtest violation is reported, add "-Djtest.fail=true" to Jtest parameters run options.
           
