@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+  name: RAGNAR
 
 steps:
 - task: Gradle@2
@@ -21,3 +21,8 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'build'
+    options: '-Djtest.skip=true'
+- task: Jtest@0
+  inputs:
+    workingDir: '$(Pipeline.Workspace)'
+    dataJson: 'build/jtest/jtest.data.json'
