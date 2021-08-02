@@ -25,5 +25,5 @@ steps:
 - task: PublishPipelineArtifact@1
   displayName: 'SARIF Artifacts'
   inputs:
-    targetPath: $(jtest.report)/report.sarif
+    targetPath: $(jtest.report)
     artifact: CodeAnalysisLogs
