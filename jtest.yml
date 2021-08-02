@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  name: RAGNAR
+  name: Default
 
 steps:
 - task: Gradle@2
