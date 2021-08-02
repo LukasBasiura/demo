@@ -24,5 +24,4 @@ steps:
     options: '-Djtest.skip=true'
 - task: Jtest@0
   inputs:
-    workingDir: ''
     dataJson: 'demo.data.json'
