@@ -26,4 +26,4 @@ steps:
   displayName: 'SARIF Artifacts'
   inputs:
     targetPath: $(jtest.report)
-    artifact: CodeAnalysisLogs
+    artifact: CodeAnalysis
