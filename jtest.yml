@@ -24,4 +24,5 @@ steps:
     options: '-Djtest.skip=true'
 - task: Jtest@0
   inputs:
+    workingDir: '$(Build.Repository.LocalPath)'
     dataJson: 'demo.data.json'
