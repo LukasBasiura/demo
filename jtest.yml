@@ -5,6 +5,12 @@ pool:
   name: Default
 
 steps:
+- task: CmdLine@2
+  displayName: Checkout
+  inputs:
+    script: |
+             git checkout $(Build.SourceBranchName)
+             git pull
 - task: Gradle@2
   inputs:
     workingDirectory: ''
