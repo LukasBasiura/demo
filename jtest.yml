@@ -23,7 +23,6 @@ steps:
     testResultsFiles: '**/TEST-*.xml'
     tasks: |
            'build'
-           'jtest'
     options: |
              '-Djtest.skip=true'
 - task: Jtest@0
