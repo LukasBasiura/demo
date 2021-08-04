@@ -10,6 +10,14 @@ pool:
   name: Default
 
 steps:
+- checkout: self
+  persistCredentials: true
+- task: CmdLine@2
+  displayName: Checkout Code - $(Build.SourceBranchName)
+  inputs:
+    script: |
+      git checkout $(Build.SourceBranchName)
+      git pull
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
