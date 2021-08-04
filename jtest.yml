@@ -19,12 +19,9 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
-    tasks: |
-           'build'
-    options: |
-             '-Djtest.skip=true'
+    tasks: 'build'
+    options: '-Djtest.skip=true'
+    
 - task: Jtest@0
   name: jtest
   inputs:
