@@ -21,8 +21,11 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
-    tasks: 'build'
-    options: '-Djtest.skip=true'
+    tasks: |
+           'build'
+           'jtest'
+    options: |
+             '-Djtest.skip=true'
 - task: Jtest@0
   name: jtest
   inputs:
