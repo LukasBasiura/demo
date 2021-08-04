@@ -34,3 +34,4 @@ steps:
   inputs:
     resultsFiles: '$(jtest.report)'
     failOnFailures: false
+    testRunTitle: 'Sample Test Run'
