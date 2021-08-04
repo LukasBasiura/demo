@@ -24,6 +24,5 @@ steps:
     dataJson: 'demo.data.json'
 - task: PublishParasoftResults@1
   inputs:
-    resultsFiles: |
-      **/rep*.xml
-      **/rep*.sarif
+    resultsFiles: $(jtest.report)
+    failOnFailures: true
