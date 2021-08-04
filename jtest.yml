@@ -22,8 +22,8 @@ steps:
   inputs:
     workingDir: '$(Build.Repository.LocalPath)'
     dataJson: 'demo.data.json'
-- task: PublishPipelineArtifact@1
-  displayName: 'SARIF Artifacts'
+- task: PublishParasoftResults@1
   inputs:
-    targetPath: $(jtest.report)
-    artifact: CodeAnalysisLogs
+    resultsFiles: |
+      **/rep*.xml
+      **/rep*.sarif
