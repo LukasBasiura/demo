@@ -22,3 +22,15 @@ steps:
            jtest:jtest
     options: -Djtest.skip=true
 
+- task: Jtest@0
+  name: jtest
+  inputs:
+    workingDir: '$(Build.Repository.LocalPath)'
+    dataJson: 'demo.data.json'
+
+- task: PublishParasoftResults@1
+  inputs:
+    resultsFiles: $(jtest.report)
+    failOnFailures: false
+    testRunTitle: 'Sample Test Run'
+
