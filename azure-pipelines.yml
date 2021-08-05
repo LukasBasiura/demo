@@ -25,16 +25,14 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
-    goals: |
-           install
-           jtest:jtest
-    options: -Djtest.skip=true
+    goals: ' install jtest:jtest'
+    options: '-Djtest.skip=true'
 
 - task: Jtest@0
   name: jtest
   inputs:
     workingDir: '$(Build.Repository.LocalPath)'
-    dataJson: 'demo.data.json'
+    dataJson: 'target\jtest\jtest.data.json'
 
 - task: PublishParasoftResults@1
   inputs:
