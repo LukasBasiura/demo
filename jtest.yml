@@ -22,7 +22,9 @@ steps:
     tasks: |
           build
           jtest
-    options: -Djtest.skip=true
+    options: |
+             -Djtest.skip=true
+             -I C:\Users\lukabass\jtest\integration\gradle\init.gradle
     
 - task: Jtest@0
   name: jtest
