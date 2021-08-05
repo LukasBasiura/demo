@@ -19,13 +19,8 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
-    tasks: |
-          build
-          jtest
-    options: |
-             -Djtest.skip=true
-             -I 
-             C:\Users\lukabass\jtest\integration\gradle\init.gradle
+    tasks: 'build jtest'
+    options: '-Djtest.skip=true -I C:\Users\lukabass\jtest\integration\gradle\init.gradle'
     
 - task: Jtest@0
   name: jtest
