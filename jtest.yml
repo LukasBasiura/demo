@@ -19,14 +19,17 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
-    tasks: 'build'
-    options: '-Djtest.skip=true'
+    tasks: |
+          build
+          jtest
+    options: -Djtest.skip=true
     
 - task: Jtest@0
   name: jtest
   inputs:
     workingDir: '$(Build.Repository.LocalPath)'
     dataJson: 'demo.data.json'
+    
 - task: PublishParasoftResults@1
   inputs:
     resultsFiles: '$(jtest.report)'
