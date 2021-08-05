@@ -5,6 +5,7 @@ pool:
   name: Default
 
 steps:
+- task: NuGetToolInstaller@1
 
 - checkout: self
   persistCredentials: true
