@@ -26,7 +26,7 @@ steps:
   name: jtest
   inputs:
     workingDir: '$(Build.Repository.LocalPath)'
-    dataJson: 'demo.data.json'
+    dataJson: 'build\jtest\jtest.data.json'
     
 - task: PublishParasoftResults@1
   inputs:
