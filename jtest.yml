@@ -33,6 +33,11 @@ steps:
     workingDir: '$(Build.Repository.LocalPath)'
     dataJson: 'build\jtest\jtest.data.json'
     
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(jtest.report)'
+    ArtifactName: 'report.xml'
+    publishLocation: 'Container'
     
 - task: PublishParasoftResults@1
   inputs:
