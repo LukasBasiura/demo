@@ -28,7 +28,7 @@ steps:
     tasks: 'build jtest'
     options: '-Djtest.skip=true -I C:\Users\lukabass\jtest\integration\gradle\init.gradle'
     
-- task: Parasoft-Jtest@0
+- task: ParasoftJtest@0
   name: jtest
   inputs:
     workingDir: '$(Build.Repository.LocalPath)'
