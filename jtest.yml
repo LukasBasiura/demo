@@ -1,3 +1,4 @@
+name: Run Parasoft Jtest
 trigger:
 - master
 
