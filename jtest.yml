@@ -28,12 +28,12 @@ steps:
     tasks: 'build jtest'
     options: '-Djtest.skip=true -I C:\Users\lukabass\jtest\integration\gradle\init.gradle'
     
-- task: ParasoftJtest@0
+- task: RunParasoftJtest@0
   name: jtest
   inputs:
     workingDir: '$(Build.Repository.LocalPath)'
     dataJson: 'build\jtest\jtest.data.json'
-    
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(jtest.report)'
