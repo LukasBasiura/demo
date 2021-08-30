@@ -36,12 +36,12 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(jtest.report)'
+    PathtoPublish: '$(Build.Repository.LocalPath)/reports'
     ArtifactName: 'report.xml'
     publishLocation: 'Container'
     
 - task: PublishParasoftResults@1
   inputs:
-    resultsFiles: '$(jtest.report)'
+    resultsFiles: '$(Build.Repository.LocalPath)/reports'
     failOnFailures: false
     testRunTitle: 'Sample Test Run'
