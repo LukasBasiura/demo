@@ -42,6 +42,6 @@ steps:
     
 - task: PublishParasoftResults@1
   inputs:
-    resultsFiles: '$(Build.Repository.LocalPath)/reports'
+    resultsFiles: '$(Build.Repository.LocalPath)/reports/report.sarif'
     failOnFailures: false
     testRunTitle: 'Sample Test Run'
