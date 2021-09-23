@@ -6,17 +6,8 @@ pool:
   name: Default
 
 steps:
-- task: NuGetToolInstaller@1
 
-- checkout: self
-  persistCredentials: true
-
-- task: CmdLine@2
-  displayName: Checkout
-  inputs:
-    script: |
-             git checkout $(Build.SourceBranchName)
-             git pull
+# Configures your Gradle project.  
 - task: Gradle@2
   inputs:
     workingDirectory: ''
@@ -26,22 +17,24 @@ steps:
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
     tasks: 'build jtest'
-    options: '-Djtest.skip=true -I C:\Users\lukabass\jtest\integration\gradle\init.gradle'
-    
+    options: '-Djtest.skip=true -I path\to\jtest\integration\gradle\init.gradle'
+
+# Runs code analysis with Jtest.   
 - task: RunParasoftJtest@0
-  name: jtest
   inputs:
     workingDir: '$(Build.Repository.LocalPath)'
     dataJson: 'build\jtest\jtest.data.json'
 
+# Uploads analysis results in the SARIF format, so that they can be accessed in the 'Scans' tab.
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.Repository.LocalPath)/reports/report.sarif'
+    ArtifactName: 'CodeAnalysisLogs'
+    publishLocation: 'Container'
+
+# Uploads all report files (.xml, .html, .sarif) as build artifacts.
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.Repository.LocalPath)/reports'
-    ArtifactName: 'report.xml'
+    ArtifactName: 'JtestReports'
     publishLocation: 'Container'
-    
-- task: PublishParasoftResults@1
-  inputs:
-    resultsFiles: '$(Build.Repository.LocalPath)/reports/report.sarif'
-    failOnFailures: false
-    testRunTitle: 'Sample Test Run'
