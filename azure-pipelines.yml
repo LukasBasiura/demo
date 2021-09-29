@@ -10,14 +10,7 @@ pool:
   name: Default
 
 steps:
-- checkout: self
-  persistCredentials: true
-- task: CmdLine@2
-  displayName: Checkout Code - $(Build.SourceBranchName)
-  inputs:
-    script: |
-      git checkout $(Build.SourceBranchName)
-      git pull
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -28,15 +21,22 @@ steps:
     goals: ' install jtest:jtest'
     options: '-Djtest.skip=true'
 
-- task: Jtest@0
+- task: RunParasoftJtest@0
   name: jtest
   inputs:
     workingDir: '$(Build.Repository.LocalPath)'
     dataJson: 'target\jtest\jtest.data.json'
 
-- task: PublishParasoftResults@1
+- task: PublishBuildArtifacts@1
   inputs:
-    resultsFiles: $(jtest.report)
-    failOnFailures: false
-    testRunTitle: 'Sample Test Run'
+    PathtoPublish: 'reports/report.sarif'
+    ArtifactName: 'CodeAnalysisLogs'
+    publishLocation: 'Container'
+
+# Uploads all report files (.xml, .html, .sarif) as build artifacts.
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'reports'
+    ArtifactName: 'JtestReports'
+    publishLocation: 'Container'
 
